@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>FPGS</title>
+    </h:head>
+    <h:body>
+          <p:panel id="pnlDistancia"
+                 header="calculo de distancia"
+                 style="width: 400px"
+                 footer="Escuela de Minas">
+            <h:form id="frmDistancia">
+                <h:panelGrid id="tblDistancia" columns="4">
+                    <p:outputLabel id="lblA1" value="puntoA("/>
+                    <p:inputText id="txtA1x" value="#{distanciaFormBean.x1}" size="3"/>
+                    <p:inputText id="txtA1y" value="#{distanciaFormBean.y1}" size="3"/>
+                      <p:outputLabel id="lblA2" value=")"/>
+                      
+                      <p:outputLabel id="lblB1" value="puntoB("/>
+                      <p:inputText id="txtB1x" value="#{distanciaFormBean.x2}" size="3"/>
+                      <p:inputText id="txtB1y" value="#{distanciaFormBean.y2}" size="3"/>
+                      <p:outputLabel id="lblB2" value=")"/>
+                    <p:commandButton id="btnCalcular" value="calcular" update="lblValorDistancia"
+                                     action="#{distanciaFormBean.asignarValor()}"/>
+                    <p:outputLabel id="lblValorDistancia" value="#{distanciaFormBean.d}"/>
+                </h:panelGrid>
+            </h:form>   
+        </p:panel>
+    </h:body>
+</html>
+
