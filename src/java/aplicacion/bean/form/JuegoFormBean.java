@@ -28,35 +28,40 @@ private char letraIngresada;
      */
     public JuegoFormBean() {
         juegoAhorcado = new JuegoAhorcado();
-        componenteDeshabilitado=false;
+        componenteDeshabilitado = false;
     }
 public void empezarJuego(){
-    
-        getJuegoAhorcado().empezarJuego(getPalabraIngresada());
-        setComponenteDeshabilitado(true);
+    juegoAhorcado.empezarJuego(getPalabraIngresada());
+    setComponenteDeshabilitado(true);
     FacesContext context = FacesContext.getCurrentInstance();
     context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Juego Iniciado", "Que tengas suerte"));
     
 }
+public void nuevo(){
+    getJuegoAhorcado().nuevoJuego(getPalabraIngresada());
+    setComponenteDeshabilitado(false);
+    FacesContext context = FacesContext.getCurrentInstance();
+}
 
-public void controlarLetra(){
-    boolean esLetraEncontrada=getJuegoAhorcado().buscarLetra(getLetraIngresada());
+public void controlarLetra() throws InterruptedException{
+    boolean esLetraEncontrada=juegoAhorcado.buscarLetra(getLetraIngresada());
     if(esLetraEncontrada==true){
-        if (getJuegoAhorcado().juegoGanado() == true){
+        if (juegoAhorcado.juegoGanado()==true){
             FacesContext context = FacesContext.getCurrentInstance();
             setComponenteDeshabilitado(false);
-            setPalabraIngresada(new String());
+            setPalabraIngresada(new String ());
             setJuegoAhorcado(new JuegoAhorcado());
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "WINNER!","Usted gano el juego!!"));
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"WINNER!","Usted ganó el Juego!"));
             
         }
-    }else{
-        if (getJuegoAhorcado().getIntentos() ==0){
+    }
+    else{
+        if(juegoAhorcado.getIntentos() == 0){
             FacesContext context = FacesContext.getCurrentInstance();
             setComponenteDeshabilitado(false);
-            setPalabraIngresada(new String());
             setJuegoAhorcado(new JuegoAhorcado());
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "GAME OVER","Usted perdio el juego!!"));
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL,"GAME OVER","Usted perdió el Juego!"));
+            
         }
     }
 }

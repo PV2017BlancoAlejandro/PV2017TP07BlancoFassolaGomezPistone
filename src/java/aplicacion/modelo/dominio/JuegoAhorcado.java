@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class JuegoAhorcado implements Serializable {
     private String palabraAdivinar;
     private int intentos;
+    private String imagen;
     private char[] palabraAhorcado;
 
     public JuegoAhorcado() {
@@ -30,14 +31,13 @@ public class JuegoAhorcado implements Serializable {
         setPalabraAdivinar(palabra);
     }
     
-    public ArrayList<String> getPalabraAhorcadoFormat(){
-        ArrayList<String> caracteresPalabra = new ArrayList();
-        for (int i = 0 ;i< palabraAdivinar.length(); i++){
+    public ArrayList<String> getPalabraAhorcadoFOrmat(){
+        ArrayList<String> caracteresPalabra=new ArrayList();
+        for(int i = 0;i < palabraAdivinar.length();i++){
             caracteresPalabra.add(String.valueOf(palabraAhorcado[i]));
         }
         return caracteresPalabra;
     }
-            
     public boolean buscarLetra(char letra){
     boolean encontro=false;
     for (int i=0;i<palabraAdivinar.length();i++){
@@ -48,21 +48,43 @@ public class JuegoAhorcado implements Serializable {
     }
     if (encontro==false){
         setIntentos(getIntentos()-1);
+        switch (getIntentos()){
+            case 4:
+                setImagen("/images/imagen1.jpg");
+                break;
+            case 3:
+                setImagen ("/images/imagen2.jpg");
+                break;
+            case 2:
+                setImagen ("/images/imagen3.jpg");
+            break;
+            case 1:
+                setImagen ("/images/imagen4.jpg");
+            break;
+            case 0:
+                setImagen ("/images/imagen5.jpg");
+            break;
+        }
         return false;
     }
     else{
         return true;}
     }
 
-    public boolean juegoGanado(){
-        boolean ganador=true;
-        for(int i = 0; i< palabraAdivinar.length();i++){
-            if(palabraAdivinar.charAt(i) != palabraAhorcado[i]){
+    public boolean juegoGanado (){
+        boolean ganador = true;
+        for (int i = 0; i < palabraAdivinar.length();i++){
+            if (palabraAdivinar.charAt(i)!=palabraAhorcado[i]){
                 ganador=false;
             }
         }
         return ganador;
     }
+public void nuevoJuego (String palabra){
+    setPalabraAdivinar(palabra);
+    palabraAdivinar="";
+    intentos=5;
+}
     /**
      * @return the palabraAdivinar
      */
@@ -78,7 +100,7 @@ public class JuegoAhorcado implements Serializable {
     }
 
     /**
-     * @return the intentosa
+     * @return the intentos
      */
     public int getIntentos() {
         return intentos;
@@ -103,6 +125,20 @@ public class JuegoAhorcado implements Serializable {
      */
     public void setPalabraAhorcado(char[] palabraAhorcado) {
         this.palabraAhorcado = palabraAhorcado;
+    }
+
+    /**
+     * @return the imagen
+     */
+    public String getImagen() {
+        return imagen;
+    }
+
+    /**
+     * @param imagen the imagen to set
+     */
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
     
 }

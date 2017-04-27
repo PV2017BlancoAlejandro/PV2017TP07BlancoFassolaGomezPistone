@@ -10,7 +10,7 @@ and open the template in the editor.
       xmlns:p="http://primefaces.org/ui">
       
     <h:head>
-        <title>JUEGO AHORCADO</title>
+        <title>TP 7</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
@@ -19,7 +19,7 @@ and open the template in the editor.
                    <p:messages id="mensajes" showDetail="true" />
                    <p:panelGrid id="gridJuego" columns="4" >
                        <p:dataGrid id="gridPalabra" columns="10" var="palabra"
-                                   emptyMessage="Ingrese una palabra" value="#{juegoFormBean.juegoAhorcado.palabraAhorcadoFormat}">
+                                   emptyMessage="Ingrese una palabra" value="#{juegoFormBean.juegoAhorcado.palabraAhorcadoFOrmat}">
                                    <p:panelGrid columns="1">
                                          <p:outputLabel value="#{palabra}"/>
                            </p:panelGrid>
@@ -35,9 +35,19 @@ and open the template in the editor.
                        </p:panelGrid>
                            <p:outputLabel value="intento: " />
                            <p:outputLabel value="#{juegoFormBean.juegoAhorcado.intentos}"/>
+                           <p:commandButton value="Nuevo Juego"
+                                            disabled="#{juegoFormBean.componenteDeshabilitado eq false}"
+                                            actionListener="#{juegoFormBean.nuevo()}"/>
+                           
                    </p:panelGrid>
-                   
-           </h:form>   
+           <h:panelGrid>
+                       <p:graphicImage id="imagenAhorcado" 
+                                       value="#{juegoFormBean.juegoAhorcado.imagen}"/>
+                   </h:panelGrid>
+           </h:form>
+            <a href="./faces/index.xhtml">
+                  <button> Regresar </button>
+              </a>
        </p:panel>
     </h:body>
 </html>
